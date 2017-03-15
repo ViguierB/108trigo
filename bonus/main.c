@@ -22,6 +22,8 @@ t_fct	g_fct_tab[] =
     {"SIN", &my_sin},
     {"COSH", &my_cosh},
     {"SINH", &my_sinh},
+    {"ACOS", &my_acos},
+    {"ASIN", &my_asin},
     {"-h", &help},
     {"--help", &help},
     {NULL, &help}
