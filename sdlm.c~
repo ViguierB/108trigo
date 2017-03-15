@@ -1,0 +1,65 @@
+/*
+** sdlm.c for matj in /home/benji_epitech/Maths/108trigo
+** 
+** Made by Benjamin Viguier
+** Login   <benjamin.viguier@epitech.eu>
+** 
+** Started on  Wed Mar 15 14:04:31 2017 Benjamin Viguier
+** Last update Wed Mar 15 14:04:54 2017 Benjamin Viguier
+*/
+
+
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+#include "trigo.h"
+
+char	*my_name;
+
+t_matrix	*my_exp(t_matrix *m)
+{
+  t_matrix	*res;
+
+  return (res);
+}
+
+t_matrix	*my_cos(t_matrix *m)
+{
+  t_matrix	*res;
+
+  return (res);
+}
+
+t_matrix	*my_sin(t_matrix *m)
+{
+  t_matrix	*res;
+
+  return (res);
+}
+
+t_matrix	*my_cosh(t_matrix *m)
+{
+  t_matrix	*res;
+
+  return (res);
+}
+
+t_matrix	*my_sinh(t_matrix *m)
+{
+  t_matrix	*res;
+
+  return (res);
+}
+
+t_matrix	*help(t_matrix *m)
+{
+  m = (void*) m;
+
+  printf("USAGE\n"
+	 "\t%s\tfun a0 a1 a2....\n"
+	 "DESCRIPTION\n"
+	 "\tfun\tfunction to be applied, among at least ""EXP"", ""COS"", ""SIN"", ""COSH"" and ""SINH""\n"
+	 "\tai\tcoeficients of the matrix\n", my_name);
+  return (NULL);
+}

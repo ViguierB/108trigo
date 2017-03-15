@@ -1,0 +1,34 @@
+/*
+** matrix.c for math in /home/benji_epitech/Maths/108trigo
+** 
+** Made by Benjamin Viguier
+** Login   <benjamin.viguier@epitech.eu>
+** 
+** Started on  Wed Mar 15 14:25:41 2017 Benjamin Viguier
+** Last update Wed Mar 15 14:38:24 2017 Benjamin Viguier
+*/
+
+#include <string.h>
+#include "trigo.h"
+
+int	cpy_matrix(t_matrix *dest, t_matrix *from)
+{
+  dest->s = from->s;
+  dest->buf = malloc(sizeof(double) * dest->s * dest->s);
+  my_memcpy(dest->buf, from->buf, sizeof(double) * dest->s * dest->s);
+}
+
+int		mult_matrix(t_matrix *a, t_matrix *b)
+{
+  double	*dest;
+  int		i, j;
+  
+  dest = malloc(sizeof(double) * a->s * a->s);
+  memset(dest, 0, sizeof(double) * a->s * a->s);
+  for (i = 0; i < a->s; i++)
+      for (j = 0; j < a->s; j++)
+	  dest[i][j] += a[i][j] * b[j][i];
+  free(a->buf);
+  a->buf = dest;
+  return (0);
+}
