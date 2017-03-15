@@ -5,13 +5,13 @@
 ** Login   <benjamin.viguier@epitech.eu>
 ** 
 ** Started on  Tue Mar 14 13:18:15 2017 Benjamin Viguier
-** Last update Wed Mar 15 22:38:35 2017 Benjamin Viguier
+** Last update Wed Mar 15 22:43:21 2017 Benjamin Viguier
 */
 
 #ifndef TRIGO_H_
 # define TRIGO_H_
 
-# define TIMEOUT (1000)
+# define TIMEOUT (10000)
 # define PRECI (100)
 
 typedef struct	s_matrix
