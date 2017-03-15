@@ -5,7 +5,7 @@
 ** Login   <benjamin.viguier@epitech.eu>
 ** 
 ** Started on  Wed Mar 15 14:25:41 2017 Benjamin Viguier
-** Last update Wed Mar 15 16:53:55 2017 Benjamin Viguier
+** Last update Wed Mar 15 20:00:04 2017 Benjamin Viguier
 */
 
 #include <stdlib.h>
@@ -48,6 +48,16 @@ int		mult_matrix(t_matrix *a, t_matrix *b)
 	dest[i * a->s + j] += a->buf[i * a->s + k] * b->buf[k * a->s + j];
   free(a->buf);
   a->buf = dest;
+  return (0);
+}
+
+int	mul_matrix(t_matrix *a, double b)
+{
+  int		i, j;
+
+  for (i = 0; i < a->s; i++)
+    for (j = 0; j < a->s; j++)
+      a->buf[i * a->s +j] *= b;
   return (0);
 }
 

@@ -5,7 +5,7 @@
 ** Login   <benjamin.viguier@epitech.eu>
 ** 
 ** Started on  Wed Mar 15 14:04:31 2017 Benjamin Viguier
-** Last update Wed Mar 15 19:43:54 2017 Benjamin Viguier
+** Last update Wed Mar 15 22:37:11 2017 Benjamin Viguier
 */
 
 
@@ -115,17 +115,99 @@ t_matrix	*my_sin(t_matrix *m)
   return (res);
 }
 
-t_matrix	*my_cosh(t_matrix *m)
-{
-  t_matrix	*res;
-
-  return (res);
-}
-
 t_matrix	*my_sinh(t_matrix *m)
 {
   t_matrix	*res;
+  t_matrix	x;
+  t_matrix	tmp;
+  double	fac = 6;
+  int		i = 2;
+  int		j = 3;
+  clock_t	start = clock();
+  clock_t	now = start;
 
+  res = malloc(sizeof(t_matrix));
+  cpy_matrix(&x, m);
+  cpy_matrix(res, m);
+  while (i < PRECI && (now - start) < TIMEOUT)
+    {
+      mult_matrix(&x, m);
+      mult_matrix(&x, m);
+      cpy_matrix(&tmp, &x);
+      div_matrix(&tmp, fac);
+      add_matrix(res, &tmp);
+      free(tmp.buf);
+      i++;
+      fac *= ++j;
+      fac *= ++j;
+      now = clock();
+    }
+  free(x.buf);
+  return (res);
+}
+
+t_matrix	*my_cosh(t_matrix *m)
+{
+  t_matrix	*res;
+  t_matrix	x;
+  t_matrix	tmp;
+  double	fac = 2;
+  int		i = 2;
+  int		j = 2;
+  clock_t	start = clock();
+  clock_t	now = start;
+
+  res = malloc(sizeof(t_matrix));
+  cpy_matrix(&x, m);
+  get_imatrix(res, m->s);
+  while (i < PRECI && (now - start) < TIMEOUT)
+    {
+      mult_matrix(&x, m);
+      cpy_matrix(&tmp, &x);
+      div_matrix(&tmp, fac);
+      add_matrix(res, &tmp);
+      free(tmp.buf);
+      mult_matrix(&x, m);
+      i++;
+      fac *= ++j;
+      fac *= ++j;
+      now = clock();
+    }
+  free(x.buf);
+  return (res);
+}
+
+t_matrix	*my_asin(t_matrix *m)
+{
+  t_matrix	*res;
+  t_matrix	x;
+  t_matrix	tmp;
+  int		i = 2;
+  double	j = 3;
+  double	ifac = 1;
+  double	pfac = 2;
+  clock_t	start = clock();
+  clock_t	now = start;
+
+  res = malloc(sizeof(t_matrix));
+  cpy_matrix(&x, m);
+  cpy_matrix(res, m);
+  while (i < PRECI && (now - start) < TIMEOUT)
+    {
+      mult_matrix(&x, m);
+      mult_matrix(&x, m);
+      cpy_matrix(&tmp, &x);
+      div_matrix(&tmp, j);
+      mul_matrix(&tmp, ifac / pfac);
+      add_matrix(res, &tmp);
+      free(tmp.buf);
+      i++;
+      ifac *= j;
+      pfac *= j + 1;
+      j += 2;
+      now = clock();
+    }
+  free(x.buf);
   return (res);
 }
 

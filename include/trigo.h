@@ -5,14 +5,14 @@
 ** Login   <benjamin.viguier@epitech.eu>
 ** 
 ** Started on  Tue Mar 14 13:18:15 2017 Benjamin Viguier
-** Last update Wed Mar 15 17:00:24 2017 Benjamin Viguier
+** Last update Wed Mar 15 22:38:35 2017 Benjamin Viguier
 */
 
 #ifndef TRIGO_H_
 # define TRIGO_H_
 
 # define TIMEOUT (1000)
-# define PRECI (50)
+# define PRECI (100)
 
 typedef struct	s_matrix
 {
@@ -37,6 +37,7 @@ t_matrix	*help(t_matrix *m);
 
 int	cpy_matrix(t_matrix *dest, t_matrix *from);
 int	mult_matrix(t_matrix *a, t_matrix *b);
+int	mul_matrix(t_matrix *a, double b);
 int	add_matrix(t_matrix *a, t_matrix *b);
 int	sub_matrix(t_matrix *a, t_matrix *b);
 int	div_matrix(t_matrix *a, double b);
