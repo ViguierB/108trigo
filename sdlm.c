@@ -5,7 +5,7 @@
 ** Login   <benjamin.viguier@epitech.eu>
 ** 
 ** Started on  Wed Mar 15 14:04:31 2017 Benjamin Viguier
-** Last update Wed Mar 15 17:46:55 2017 Benjamin Viguier
+** Last update Wed Mar 15 19:43:54 2017 Benjamin Viguier
 */
 
 
@@ -84,7 +84,34 @@ t_matrix	*my_cos(t_matrix *m)
 t_matrix	*my_sin(t_matrix *m)
 {
   t_matrix	*res;
+  t_matrix	x;
+  t_matrix	tmp;
+  double	fac = 6;
+  int		i = 2;
+  int		j = 3;
+  clock_t	start = clock();
+  clock_t	now = start;
 
+  res = malloc(sizeof(t_matrix));
+  cpy_matrix(&x, m);
+  cpy_matrix(res, m);
+  while (i < PRECI && (now - start) < TIMEOUT)
+    {
+      mult_matrix(&x, m);
+      mult_matrix(&x, m);
+      cpy_matrix(&tmp, &x);
+      div_matrix(&tmp, fac);
+      if (i % 2)
+	add_matrix(res, &tmp);
+      else
+	sub_matrix(res, &tmp);
+      free(tmp.buf);
+      i++;
+      fac *= ++j;
+      fac *= ++j;
+      now = clock();
+    }
+  free(x.buf);
   return (res);
 }
 
