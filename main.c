@@ -5,7 +5,7 @@
 ** Login   <benjamin.viguier@epitech.eu>
 ** 
 ** Started on  Tue Mar 14 13:16:37 2017 Benjamin Viguier
-** Last update Wed Mar 15 16:57:51 2017 Benjamin Viguier
+** Last update Wed Mar 15 22:52:15 2017 Benjamin Viguier
 */
 
 #include <math.h>
@@ -22,11 +22,8 @@ t_fct	g_fct_tab[] =
     {"SIN", &my_sin},
     {"COSH", &my_cosh},
     {"SINH", &my_sinh},
-    {"exp", &my_exp},
-    {"cos", &my_cos},
-    {"sin", &my_sin},
-    {"cosh", &my_cosh},
-    {"sinh", &my_sinh},
+    {"ACOS", &my_acos},
+    {"ASIN", &my_asin},
     {"-h", &help},
     {"--help", &help},
     {NULL, &help}
@@ -67,6 +64,20 @@ int	print_matrix(t_matrix *m)
   return (0);
 }
 
+char	*upper(char *str)
+{
+  char	*res;
+
+  res = str;
+  while (*res)
+    {
+      if (*res >= 'a' && *res <= 'z')
+	*res += 'A' - 'a';
+      res++;
+    }
+  return (str);
+}
+
 int		main(int ac, char **av)
 {
   t_matrix	m;
@@ -89,7 +100,7 @@ int		main(int ac, char **av)
       i = 0;
       while (g_fct_tab[i].str)
 	{
-	  if (!strcmp(g_fct_tab[i].str, av[1]))
+	  if (!strcmp(g_fct_tab[i].str, upper(av[1])))
 	    {
 	      res = (g_fct_tab[i].fct)(&m);
 	      break;

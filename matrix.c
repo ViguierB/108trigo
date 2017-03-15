@@ -21,9 +21,9 @@ int	get_imatrix(t_matrix *dest, int s)
   for (i = 0; i < s; i++)
     for (j = 0; j < s; j++)
       if (i == j)
-	dest->buf[i * s + j] = 1;
+	      dest->buf[i * s + j] = 1;
       else
-	dest->buf[i * s + j] = 0;
+	      dest->buf[i * s + j] = 0;
   return (0);
 }
 
@@ -45,7 +45,7 @@ int		mult_matrix(t_matrix *a, t_matrix *b)
   for (i = 0; i < a->s; i++)
     for (j = 0; j < a->s; j++)
       for (k = 0; k < a->s; k++)
-	dest[i * a->s + j] += a->buf[i * a->s + k] * b->buf[k * a->s + j];
+	      dest[i * a->s + j] += a->buf[i * a->s + k] * b->buf[k * a->s + j];
   free(a->buf);
   a->buf = dest;
   return (0);
@@ -78,6 +78,16 @@ int	sub_matrix(t_matrix *a, t_matrix *b)
   for (i = 0; i < a->s; i++)
     for (j = 0; j < a->s; j++)
       a->buf[i * a->s +j] -= b->buf[i * a->s + j];
+  return (0);
+}
+
+int	ssub_matrix(t_matrix *a, double b)
+{
+  int		i, j;
+
+  for (i = 0; i < a->s; i++)
+    for (j = 0; j < a->s; j++)
+      a->buf[i * a->s +j] -= b;
   return (0);
 }
 

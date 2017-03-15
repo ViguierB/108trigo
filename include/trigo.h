@@ -5,11 +5,11 @@
 ** Login   <benjamin.viguier@epitech.eu>
 ** 
 ** Started on  Tue Mar 14 13:18:15 2017 Benjamin Viguier
-** Last update Wed Mar 15 22:43:21 2017 Benjamin Viguier
+** Last update Wed Mar 15 22:59:06 2017 Benjamin Viguier
 */
 
-#ifndef TRIGO_H_
-# define TRIGO_H_
+#ifndef TRISO_H_
+# define TRISO_H_ /* lel */
 
 # define TIMEOUT (10000)
 # define PRECI (100)
@@ -33,6 +33,8 @@ t_matrix	*my_sin(t_matrix *m);
 t_matrix	*my_exp(t_matrix *m);
 t_matrix	*my_cosh(t_matrix *m);
 t_matrix	*my_sinh(t_matrix *m);
+t_matrix	*my_acos(t_matrix *m);
+t_matrix	*my_asin(t_matrix *m);
 t_matrix	*help(t_matrix *m);
 
 int	cpy_matrix(t_matrix *dest, t_matrix *from);
@@ -41,6 +43,7 @@ int	mul_matrix(t_matrix *a, double b);
 int	add_matrix(t_matrix *a, t_matrix *b);
 int	sub_matrix(t_matrix *a, t_matrix *b);
 int	div_matrix(t_matrix *a, double b);
+int	ssub_matrix(t_matrix *a, double b);
 int	get_imatrix(t_matrix *dest, int s);
 
-#endif /* !TRIGO_H_ */
+#endif /* !TRISO_H_ */

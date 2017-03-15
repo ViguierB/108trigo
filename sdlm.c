@@ -5,7 +5,7 @@
 ** Login   <benjamin.viguier@epitech.eu>
 ** 
 ** Started on  Wed Mar 15 14:04:31 2017 Benjamin Viguier
-** Last update Wed Mar 15 22:37:11 2017 Benjamin Viguier
+** Last update Wed Mar 15 22:50:28 2017 Benjamin Viguier
 */
 
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <math.h>
 #include "trigo.h"
 
 char	*g_my_name;
@@ -208,6 +209,41 @@ t_matrix	*my_asin(t_matrix *m)
       now = clock();
     }
   free(x.buf);
+  return (res);
+}
+
+t_matrix	*my_acos(t_matrix *m)
+{
+  t_matrix	*res;
+  t_matrix	x;
+  t_matrix	tmp;
+  int		i = 2;
+  double	j = 3;
+  double	ifac = 1;
+  double	pfac = 2;
+  clock_t	start = clock();
+  clock_t	now = start;
+
+  res = malloc(sizeof(t_matrix));
+  cpy_matrix(&x, m);
+  cpy_matrix(res, m);
+  while (i < PRECI && (now - start) < TIMEOUT)
+    {
+      mult_matrix(&x, m);
+      mult_matrix(&x, m);
+      cpy_matrix(&tmp, &x);
+      div_matrix(&tmp, j);
+      mul_matrix(&tmp, ifac / pfac);
+      add_matrix(res, &tmp);
+      free(tmp.buf);
+      i++;
+      ifac *= j;
+      pfac *= j + 1;
+      j += 2;
+      now = clock();
+    }
+  free(x.buf);
+  ssub_matrix(res, M_PI / 2.0);
   return (res);
 }
 
