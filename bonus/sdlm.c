@@ -19,6 +19,17 @@
 
 char	*g_my_name;
 
+int is_mequal(t_matrix *m, t_matrix *tmp)
+{
+  int i, j;
+
+  for (i = 0; i < m->s; i++)
+    for (j = 0; j < m->s; j++)
+      if (m->buf[i * m->s + j] != tmp->buf[i * m->s + j])
+        return (0);
+  return (1);
+}
+
 void print_cycle(t_matrix *m, int ev, int cycle, clock_t *nocount)
 {
   clock_t to_remove = clock();
@@ -37,6 +48,7 @@ t_matrix	*my_exp(t_matrix *m, int ev)
   t_matrix	*res;
   t_matrix	x;
   t_matrix	tmp;
+  t_matrix  last;
   double	fac = 1;
   int		i = 2;
   clock_t toremove = 0;
@@ -49,6 +61,7 @@ t_matrix	*my_exp(t_matrix *m, int ev)
   add_matrix(res, m);
   while (i < PRECI && (now - start - toremove) < TIMEOUT)
     {
+      cpy_matrix(&last, res);      
       print_cycle(res, ev, i - 1, &toremove);
       mult_matrix(&x, m);
       fac *= i;
@@ -57,9 +70,12 @@ t_matrix	*my_exp(t_matrix *m, int ev)
       add_matrix(res, &tmp);
       free(tmp.buf);
       now = clock();
+      if (is_mequal(res, &last))
+        break;
       i++;
     }
   free(x.buf);
+  free(last.buf);
   return (res);
 }
 
@@ -68,6 +84,7 @@ t_matrix	*my_cos(t_matrix *m, int ev)
   t_matrix	*res;
   t_matrix	x;
   t_matrix	tmp;
+  t_matrix  last;
   double	fac = 2;
   int		i = 2;
   int		j = 2;
@@ -79,22 +96,26 @@ t_matrix	*my_cos(t_matrix *m, int ev)
   cpy_matrix(&x, m);
   get_imatrix(res, m->s);
   while (i < PRECI && (now - start - toremove) < TIMEOUT)
-    {
+  {
+      cpy_matrix(&last, res);    
       print_cycle(res, ev, i - 1, &toremove);
       mult_matrix(&x, m);
       cpy_matrix(&tmp, &x);
       div_matrix(&tmp, fac);
       if (i % 2)
-	add_matrix(res, &tmp);
+	      add_matrix(res, &tmp);
       else
-	sub_matrix(res, &tmp);
+	      sub_matrix(res, &tmp);
       free(tmp.buf);
       mult_matrix(&x, m);
       i++;
       fac *= ++j;
       fac *= ++j;
       now = clock();
+      if (is_mequal(res, &last))
+        break;
     }
+  free(last.buf);
   free(x.buf);
   return (res);
 }
@@ -104,6 +125,7 @@ t_matrix	*my_sin(t_matrix *m, int ev)
   t_matrix	*res;
   t_matrix	x;
   t_matrix	tmp;
+  t_matrix  last;
   double	fac = 6;
   int		i = 2;
   int		j = 3;
@@ -116,20 +138,23 @@ t_matrix	*my_sin(t_matrix *m, int ev)
   cpy_matrix(res, m);
   while (i < PRECI && (now - start - toremove) < TIMEOUT)
     {
+      cpy_matrix(&last, res);      
       print_cycle(res, ev, i - 1, &toremove);
       mult_matrix(&x, m);
       mult_matrix(&x, m);
       cpy_matrix(&tmp, &x);
       div_matrix(&tmp, fac);
       if (i % 2)
-	add_matrix(res, &tmp);
+	      add_matrix(res, &tmp);
       else
-	sub_matrix(res, &tmp);
+	      sub_matrix(res, &tmp);
       free(tmp.buf);
       i++;
       fac *= ++j;
       fac *= ++j;
       now = clock();
+      if (is_mequal(res, &last))
+        break;
     }
   free(x.buf);
   return (res);
@@ -140,6 +165,7 @@ t_matrix	*my_sinh(t_matrix *m, int ev)
   t_matrix	*res;
   t_matrix	x;
   t_matrix	tmp;
+  t_matrix  last;
   double	fac = 6;
   int		i = 2;
   int		j = 3;
@@ -152,6 +178,7 @@ t_matrix	*my_sinh(t_matrix *m, int ev)
   cpy_matrix(res, m);
   while (i < PRECI && (now - start - toremove) < TIMEOUT)
     {
+      cpy_matrix(&last, res);      
       print_cycle(res, ev, i - 1, &toremove);
       mult_matrix(&x, m);
       mult_matrix(&x, m);
@@ -163,7 +190,10 @@ t_matrix	*my_sinh(t_matrix *m, int ev)
       fac *= ++j;
       fac *= ++j;
       now = clock();
+      if (is_mequal(res, &last))
+        break;
     }
+  free(last.buf);
   free(x.buf);
   return (res);
 }
@@ -173,6 +203,7 @@ t_matrix	*my_cosh(t_matrix *m, int ev)
   t_matrix	*res;
   t_matrix	x;
   t_matrix	tmp;
+  t_matrix  last;
   double	fac = 2;
   int		i = 2;
   int		j = 2;
@@ -185,6 +216,7 @@ t_matrix	*my_cosh(t_matrix *m, int ev)
   get_imatrix(res, m->s);
   while (i < PRECI && (now - start - toremove) < TIMEOUT)
     {
+      cpy_matrix(&last, res);      
       print_cycle(res, ev, i - 1, &toremove);
       mult_matrix(&x, m);
       cpy_matrix(&tmp, &x);
@@ -196,6 +228,8 @@ t_matrix	*my_cosh(t_matrix *m, int ev)
       fac *= ++j;
       fac *= ++j;
       now = clock();
+      if (is_mequal(res, &last))
+        break;
     }
   free(x.buf);
   return (res);
@@ -206,6 +240,7 @@ t_matrix	*my_asin(t_matrix *m, int ev)
   t_matrix	*res;
   t_matrix	x;
   t_matrix	tmp;
+  t_matrix  last;
   int		i = 2;
   double	j = 3;
   double	ifac = 1;
@@ -213,12 +248,13 @@ t_matrix	*my_asin(t_matrix *m, int ev)
   clock_t toremove = 0;  
   clock_t	start = clock();
   clock_t	now = start;
-
+  
   res = malloc(sizeof(t_matrix));
   cpy_matrix(&x, m);
   cpy_matrix(res, m);
-  while (i < (PRECI * 2) && (now - start - toremove) < TIMEOUT)
+  while (i < PRECI && (now - start - toremove) < TIMEOUT)
     {
+      cpy_matrix(&last, res);      
       print_cycle(res, ev, i - 1, &toremove);
       mult_matrix(&x, m);
       mult_matrix(&x, m);
@@ -232,7 +268,10 @@ t_matrix	*my_asin(t_matrix *m, int ev)
       pfac *= j + 1;
       j += 2;
       now = clock();
+      if (is_mequal(res, &last))
+        break;
     }
+  free(last.buf);
   free(x.buf);
   return (res);
 }
