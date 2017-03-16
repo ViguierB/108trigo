@@ -16,6 +16,7 @@
 #include "trigo.h"
 
 int   g_aff_all = 0;
+int   g_isacos = 0;
 
 t_fct	g_fct_tab[] =
   {
@@ -52,11 +53,18 @@ int		fill_matrix(t_matrix *m, int ac, char **av)
   return (0);
 }
 
-int	print_matrix(t_matrix *m)
+int	        print_matrix(t_matrix *m)
 {
-  int	i;
+  int	      i;
+  t_matrix  tmp;
 
   i = 0;
+  if (g_isacos)
+  {
+    cpy_matrix(&tmp, m);
+    invssub_matrix(&tmp, M_PI / 2.0);
+    m = &tmp;
+  }
   while (i < m->s * m->s)
     {
       if (g_aff_all)
@@ -65,6 +73,8 @@ int	print_matrix(t_matrix *m)
         printf("%.2lf%s", m->buf[i], ((i + 1) % m->s) ? "\t" : "\n");
       i++;
     }
+  if (g_isacos)
+    free(tmp.buf);
   return (0);
 }
 

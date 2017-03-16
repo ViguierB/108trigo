@@ -301,7 +301,9 @@ t_matrix	*my_acos(t_matrix *m, int ev)
 {
   t_matrix	*res;
   
+  g_isacos = 1;
   res = my_asin(m, ev);
+  g_isacos = 0;
   invssub_matrix(res, M_PI / 2.0);
   return (res);
 }

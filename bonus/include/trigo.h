@@ -27,6 +27,7 @@ typedef struct	s_fct
 }		t_fct;
 
 extern char *g_my_name;
+extern int  g_isacos;
 
 t_matrix	*my_cos(t_matrix *m, int ev);
 t_matrix	*my_sin(t_matrix *m, int ev);
