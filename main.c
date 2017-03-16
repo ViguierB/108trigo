@@ -31,6 +31,7 @@ int		fill_matrix(t_matrix *m, int ac, char **av)
 {
   int		len;
   double	*ptr;
+  char    *end;
 
   m->s = sqrt(ac);
   m->s += (m->s * m->s != ac);
@@ -44,7 +45,9 @@ int		fill_matrix(t_matrix *m, int ac, char **av)
   ptr = m->buf;
   while (ac)
     {
-      *(ptr++) = atof(*(av++));
+      *(ptr++) = strtod(*(av++), &end);
+      if (end == NULL || *end != '\0')
+        return (-1);
       ac--;
     }
   return (0);
