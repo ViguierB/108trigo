@@ -217,7 +217,7 @@ t_matrix	*my_asin(t_matrix *m, int ev)
   res = malloc(sizeof(t_matrix));
   cpy_matrix(&x, m);
   cpy_matrix(res, m);
-  while (i < PRECI && (now - start - toremove) < TIMEOUT)
+  while (i < (PRECI * 2) && (now - start - toremove) < TIMEOUT)
     {
       print_cycle(res, ev, i - 1, &toremove);
       mult_matrix(&x, m);

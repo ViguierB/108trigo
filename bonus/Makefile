@@ -10,7 +10,7 @@
 
 CC	=	gcc
 
-CFLAGS	=	-W -Wall -Wextra -g -I./include/
+CFLAGS	=	-W -Wall -Wextra -O2 -I./include/
 
 SRC	=	main.c	\
 		sdlm.c	\
