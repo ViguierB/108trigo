@@ -23,7 +23,7 @@ NAME	=	108trigo
 all	:	$(NAME)
 
 $(NAME)	:	$(OBJ)
-	$(CC) -o $(NAME) $(OBJ) -lm
+	$(CC) -o $(NAME) $(OBJ) -static -lm
 
 clean	:
 	rm -f $(OBJ)

@@ -35,6 +35,8 @@ int		fill_matrix(t_matrix *m, int ac, char **av)
   m->s = sqrt(ac);
   m->s += (m->s * m->s != ac);
   len = m->s * m->s;
+  if (len != ac)
+    return (-1);
   m->buf = malloc(sizeof(double) * len);
   if (m->buf == NULL)
     return (-1);
@@ -94,7 +96,8 @@ int		main(int ac, char **av)
   else
     {
       res = NULL;
-      fill_matrix(&m, ac - 2, av + 2);
+      if (fill_matrix(&m, ac - 2, av + 2) < 0)
+        return (84);
       i = 0;
       while (g_fct_tab[i].str)
 	{
@@ -108,8 +111,12 @@ int		main(int ac, char **av)
 	  i++;
 	}
       if (g_fct_tab[i].str == NULL)
-	(g_fct_tab[i].fct)(NULL);
+	      {
+          (g_fct_tab[i].fct)(NULL);
+          return (84);
+        }
       if (res)
-	print_matrix(res);
-    }
+	    print_matrix(res);
+  }
+  return (0);
 }

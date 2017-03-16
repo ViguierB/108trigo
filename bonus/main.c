@@ -149,6 +149,9 @@ int		main(int ac, char **av)
       if (ev)
         printf("Result :\n");
 	    print_matrix(res);
+      free(res->buf);
+      free(res);
     }
+    free(m.buf);
   }
 }
