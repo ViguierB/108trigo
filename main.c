@@ -5,7 +5,7 @@
 ** Login   <benjamin.viguier@epitech.eu>
 ** 
 ** Started on  Tue Mar 14 13:16:37 2017 Benjamin Viguier
-** Last update Wed Mar 15 22:52:15 2017 Benjamin Viguier
+** Last update Thu Mar 16 13:20:15 2017 Benjamin Viguier
 */
 
 #include <math.h>
@@ -100,6 +100,8 @@ int		main(int ac, char **av)
 	{
 	  if (!strcmp(g_fct_tab[i].str, upper(av[1])))
 	    {
+	      if (m.s == 0)
+		return (84);
 	      res = (g_fct_tab[i].fct)(&m);
 	      break;
 	    }

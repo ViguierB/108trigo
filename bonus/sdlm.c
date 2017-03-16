@@ -19,17 +19,6 @@
 
 char	*g_my_name;
 
-int is_mequal(t_matrix *m, t_matrix *tmp)
-{
-  int i, j;
-
-  for (i = 0; i < m->s; i++)
-    for (j = 0; j < m->s; j++)
-      if (m->buf[i * m->s + j] != tmp->buf[i * m->s + j])
-        return (0);
-  return (1);
-}
-
 void print_cycle(t_matrix *m, int ev, int cycle, clock_t *nocount)
 {
   clock_t to_remove = clock();
@@ -72,6 +61,11 @@ t_matrix	*my_exp(t_matrix *m, int ev)
       now = clock();
       if (is_mequal(res, &last))
         break;
+      if (is_mnan(res))
+      {
+        cpy_matrix(res, &last);
+        break;        
+      }
       i++;
     }
   free(x.buf);
@@ -114,7 +108,12 @@ t_matrix	*my_cos(t_matrix *m, int ev)
       now = clock();
       if (is_mequal(res, &last))
         break;
-    }
+      if (is_mnan(res))
+      {
+        cpy_matrix(res, &last);
+        break;        
+      }
+  }
   free(last.buf);
   free(x.buf);
   return (res);
@@ -155,6 +154,11 @@ t_matrix	*my_sin(t_matrix *m, int ev)
       now = clock();
       if (is_mequal(res, &last))
         break;
+      if (is_mnan(res))
+      {
+        cpy_matrix(res, &last);
+        break;        
+      }
     }
   free(x.buf);
   return (res);
@@ -192,6 +196,11 @@ t_matrix	*my_sinh(t_matrix *m, int ev)
       now = clock();
       if (is_mequal(res, &last))
         break;
+      if (is_mnan(res))
+      {
+        cpy_matrix(res, &last);
+        break;        
+      }
     }
   free(last.buf);
   free(x.buf);
@@ -230,6 +239,11 @@ t_matrix	*my_cosh(t_matrix *m, int ev)
       now = clock();
       if (is_mequal(res, &last))
         break;
+      if (is_mnan(res))
+      {
+        cpy_matrix(res, &last);
+        break;        
+      }
     }
   free(x.buf);
   return (res);
@@ -248,7 +262,7 @@ t_matrix	*my_asin(t_matrix *m, int ev)
   clock_t toremove = 0;  
   clock_t	start = clock();
   clock_t	now = start;
-  
+
   res = malloc(sizeof(t_matrix));
   cpy_matrix(&x, m);
   cpy_matrix(res, m);
@@ -270,7 +284,14 @@ t_matrix	*my_asin(t_matrix *m, int ev)
       now = clock();
       if (is_mequal(res, &last))
         break;
+      if (is_mnan(res))
+      {
+        cpy_matrix(res, &last);
+        break;        
+      }
     }
+  if (is_mnan(res))
+    cpy_matrix(res, &last);
   free(last.buf);
   free(x.buf);
   return (res);
@@ -281,7 +302,7 @@ t_matrix	*my_acos(t_matrix *m, int ev)
   t_matrix	*res;
   
   res = my_asin(m, ev);
-  ssub_matrix(res, M_PI / 2.0);
+  invssub_matrix(res, M_PI / 2.0);
   return (res);
 }
 

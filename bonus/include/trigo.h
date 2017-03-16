@@ -12,7 +12,7 @@
 # define TRISO_H_ /* lel */
 
 # define TIMEOUT (1000)
-# define PRECI (100)
+# define PRECI (500)
 
 typedef struct	s_matrix
 {
@@ -44,7 +44,10 @@ int	add_matrix(t_matrix *a, t_matrix *b);
 int	sub_matrix(t_matrix *a, t_matrix *b);
 int	div_matrix(t_matrix *a, double b);
 int	ssub_matrix(t_matrix *a, double b);
+int	invssub_matrix(t_matrix *a, double b);
 int	get_imatrix(t_matrix *dest, int s);
 int	print_matrix(t_matrix *m);
+int is_mequal(t_matrix *m, t_matrix *tmp);
+int is_mnan(t_matrix *m);
 
 #endif /* !TRISO_H_ */
