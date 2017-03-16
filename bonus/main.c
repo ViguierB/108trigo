@@ -82,10 +82,8 @@ char	*upper(char *str)
   return (str);
 }
 
-int   get_params(char *av)
+int   get_params(char *av, int *ev)
 {
-  int ret = 0;
-
   if (*av != '-')
     return (0);
   else
@@ -95,10 +93,10 @@ int   get_params(char *av)
     if (*av == 'a')
       g_aff_all = 1;
     if (*av == 'e')
-      ret = 1;
+      *ev = 1;
     av++;
   }
-  return (ret);
+  return (1);
 }
 
 int		main(int ac, char **av)
@@ -107,6 +105,7 @@ int		main(int ac, char **av)
   t_matrix	*res;
   int		i;
   int		ev;
+  int   add = 0;
 
   ev = 0;
   if (ac < 1)
@@ -120,13 +119,13 @@ int		main(int ac, char **av)
   }
   else
   {
-    ev = get_params(av[1]);
+    add = get_params(av[1], &ev);
     res = NULL;
-    fill_matrix(&m, ac - (2 + ev), av + (2 + ev));
+    fill_matrix(&m, ac - (2 + add), av + (2 + add));
     i = 0;
     while (g_fct_tab[i].str)
 	  {
-	    if (!strcmp(g_fct_tab[i].str, upper(av[1 + ev])))
+	    if (!strcmp(g_fct_tab[i].str, upper(av[1 + add])))
 	    {
 	      res = (g_fct_tab[i].fct)(&m, ev);
 	      break;
