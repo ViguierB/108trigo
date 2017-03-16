@@ -10,6 +10,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include "trigo.h"
 
 int	get_imatrix(t_matrix *dest, int s) 
@@ -41,7 +42,6 @@ int		mult_matrix(t_matrix *a, t_matrix *b)
   int		i, j, k;
   
   dest = malloc(sizeof(double) * a->s * a->s);
-  memset(dest, 0, sizeof(double) * a->s * a->s);
   for (i = 0; i < a->s; i++)
     for (j = 0; j < a->s; j++)
       for (k = 0; k < a->s; k++)
@@ -91,6 +91,16 @@ int	ssub_matrix(t_matrix *a, double b)
   return (0);
 }
 
+int	invssub_matrix(t_matrix *a, double b)
+{
+  int		i, j;
+
+  for (i = 0; i < a->s; i++)
+    for (j = 0; j < a->s; j++)
+      a->buf[i * a->s +j] = b - a->buf[i * a->s +j];
+  return (0);
+}
+
 int	div_matrix(t_matrix *a, double b)
 {
   int		i, j;
@@ -98,5 +108,27 @@ int	div_matrix(t_matrix *a, double b)
   for (i = 0; i < a->s; i++)
     for (j = 0; j < a->s; j++)
       a->buf[i * a->s +j] /= b;
+  return (0);
+}
+
+int is_mequal(t_matrix *m, t_matrix *tmp)
+{
+  int i, j;
+
+  for (i = 0; i < m->s; i++)
+    for (j = 0; j < m->s; j++)
+      if (m->buf[i * m->s + j] != tmp->buf[i * m->s + j])
+        return (0);
+  return (1);
+}
+
+int  is_mnan(t_matrix *m)
+{
+  int i, j;
+
+  for (i = 0; i < m->s; i++)
+    for (j = 0; j < m->s; j++)
+      if (isnan(m->buf[i * m->s + j]))
+        return (1);
   return (0);
 }
