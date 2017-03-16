@@ -5,7 +5,7 @@
 ** Login   <benjamin.viguier@epitech.eu>
 ** 
 ** Started on  Wed Mar 15 14:04:31 2017 Benjamin Viguier
-** Last update Thu Mar 16 09:55:34 2017 Benjamin Viguier
+** Last update Thu Mar 16 11:16:19 2017 Benjamin Viguier
 */
 
 
@@ -254,7 +254,8 @@ t_matrix	*help(t_matrix *m, int ev)
   printf("USAGE\n"
 	 "\t%s\t [-e|a] fun a0 a1 a2....\n"
 	 "DESCRIPTION\n"
-   "\te\tshow evolution, cycle by cycle\n"
+	 "\te\tshow evolution, cycle by cycle\n"
+	 "\ta\tshow all\n"
 	 "\tfun\tfunction to be applied, among at least ""EXP"", ""COS"", ""SIN"", ""COSH"", ""SINH"", ""ACOS"" and ""ASIN""\n"
 	 "\tai\tcoeficients of the matrix\n", g_my_name);
   return (NULL);
