@@ -64,20 +64,6 @@ int	print_matrix(t_matrix *m)
   return (0);
 }
 
-char	*upper(char *str)
-{
-  char	*res;
-
-  res = str;
-  while (*res)
-    {
-      if (*res >= 'a' && *res <= 'z')
-	*res += 'A' - 'a';
-      res++;
-    }
-  return (str);
-}
-
 int		main(int ac, char **av)
 {
   t_matrix	m;
@@ -101,7 +87,7 @@ int		main(int ac, char **av)
       i = 0;
       while (g_fct_tab[i].str)
 	{
-	  if (!strcmp(g_fct_tab[i].str, upper(av[1])))
+	  if (!strcmp(g_fct_tab[i].str, av[1]))
 	    {
 	      if (m.s == 0)
 		return (84);
