@@ -5,7 +5,7 @@
 ** Login   <benjamin.viguier@epitech.eu>
 ** 
 ** Started on  Tue Mar 14 13:16:37 2017 Benjamin Viguier
-** Last update Wed Mar 15 22:52:15 2017 Benjamin Viguier
+** Last update Thu Mar 16 09:53:53 2017 Benjamin Viguier
 */
 
 #include <math.h>
@@ -14,6 +14,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "trigo.h"
+
+int   g_aff_all = 0;
 
 t_fct	g_fct_tab[] =
   {
@@ -57,8 +59,10 @@ int	print_matrix(t_matrix *m)
   i = 0;
   while (i < m->s * m->s)
     {
-      printf("%.2lf%s", m->buf[i],
-	     ((i + 1) % m->s) ? "\t" : "\n");
+      if (g_aff_all)
+        printf("%lf%s", m->buf[i], ((i + 1) % m->s) ? "\t" : "\n");
+      else
+        printf("%.2lf%s", m->buf[i], ((i + 1) % m->s) ? "\t" : "\n");
       i++;
     }
   return (0);
@@ -72,10 +76,29 @@ char	*upper(char *str)
   while (*res)
     {
       if (*res >= 'a' && *res <= 'z')
-	*res += 'A' - 'a';
+	      *res += 'A' - 'a';
       res++;
     }
   return (str);
+}
+
+int   get_params(char *av)
+{
+  int ret = 0;
+
+  if (*av != '-')
+    return (0);
+  else
+    av++;
+  while (*av)
+  {
+    if (*av == 'a')
+      g_aff_all = 1;
+    if (*av == 'e')
+      ret = 1;
+    av++;
+  }
+  return (ret);
 }
 
 int		main(int ac, char **av)
@@ -83,33 +106,40 @@ int		main(int ac, char **av)
   t_matrix	m;
   t_matrix	*res;
   int		i;
+  int		ev;
 
+  ev = 0;
   if (ac < 1)
     g_my_name = "./108trigo";
   else
     g_my_name = av[0];
   if (ac < 2)
-    {     
-      help(NULL);
-      return (84);
-    }
+  {     
+    help(NULL, 0);
+    return (84);
+  }
   else
-    {
-      res = NULL;
-      fill_matrix(&m, ac - 2, av + 2);
-      i = 0;
-      while (g_fct_tab[i].str)
-	{
-	  if (!strcmp(g_fct_tab[i].str, upper(av[1])))
+  {
+    ev = get_params(av[1]);
+    res = NULL;
+    fill_matrix(&m, ac - (2 + ev), av + (2 + ev));
+    i = 0;
+    while (g_fct_tab[i].str)
+	  {
+	    if (!strcmp(g_fct_tab[i].str, upper(av[1 + ev])))
 	    {
-	      res = (g_fct_tab[i].fct)(&m);
+	      res = (g_fct_tab[i].fct)(&m, ev);
 	      break;
 	    }
-	  i++;
-	}
-      if (g_fct_tab[i].str == NULL)
-	(g_fct_tab[i].fct)(NULL);
-      if (res)
-	print_matrix(res);
+      i++;
     }
+    if (g_fct_tab[i].str == NULL)
+	    (g_fct_tab[i].fct)(NULL, 0);
+    if (res)
+    {
+      if (ev)
+        printf("Result :\n");
+	    print_matrix(res);
+    }
+  }
 }
