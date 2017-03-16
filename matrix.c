@@ -42,6 +42,7 @@ int		mult_matrix(t_matrix *a, t_matrix *b)
   int		i, j, k;
   
   dest = malloc(sizeof(double) * a->s * a->s);
+  memset(dest, 0, sizeof(double) * a->s * a->s);
   for (i = 0; i < a->s; i++)
     for (j = 0; j < a->s; j++)
       for (k = 0; k < a->s; k++)

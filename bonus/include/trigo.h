@@ -12,7 +12,7 @@
 # define TRISO_H_ /* lel */
 
 # define TIMEOUT (1000)
-# define PRECI (50)
+# define PRECI (500)
 
 typedef struct	s_matrix
 {

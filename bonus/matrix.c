@@ -42,6 +42,7 @@ int		mult_matrix(t_matrix *a, t_matrix *b)
   int		i, j, k;
   
   dest = malloc(sizeof(double) * a->s * a->s);
+  memset(dest, 0, sizeof(double) * a->s * a->s);
   for (i = 0; i < a->s; i++)
     for (j = 0; j < a->s; j++)
       for (k = 0; k < a->s; k++)
@@ -87,7 +88,7 @@ int	ssub_matrix(t_matrix *a, double b)
 
   for (i = 0; i < a->s; i++)
     for (j = 0; j < a->s; j++)
-      a->buf[i * a->s +j] -= b;
+      a->buf[i * a->s + j] -= b;
   return (0);
 }
 
@@ -97,7 +98,7 @@ int	invssub_matrix(t_matrix *a, double b)
 
   for (i = 0; i < a->s; i++)
     for (j = 0; j < a->s; j++)
-      a->buf[i * a->s +j] = b - a->buf[i * a->s +j];
+      a->buf[i * a->s + j] = b - a->buf[i * a->s + j];
   return (0);
 }
 
@@ -107,7 +108,7 @@ int	div_matrix(t_matrix *a, double b)
 
   for (i = 0; i < a->s; i++)
     for (j = 0; j < a->s; j++)
-      a->buf[i * a->s +j] /= b;
+      a->buf[i * a->s + j] /= b;
   return (0);
 }
 
