@@ -1,0 +1,35 @@
+.\" Manpage for 108trigo.
+.TH man 1 "17 March 2017" "1.0" "Epitech Math : 108trigo"
+.SH NAME
+108trigo
+
+Apply a given function on a given matrix, and print the result
+.SH SYNOPSIS
+    ./108trigo [-(a|e)] fun a0 a1 a2....
+.SH DESCRIPTION
+    fun			function to be applied, among at least "EXP", "COS", "SIN", "ASIN", "ACOS", "COSH" and "SINH"
+    ai			coeficients of the matrix
+.SH OPTIONS
+    [-(a|e)]        a -> display more, e -> display etapes
+    -h, --help		display a help message and exit
+.SH Exit Status:
+    84	If problem, (e.g., invalid argument(s))
+.SH EXAMPLES
+    $> 108trigo -e EXP 1 2 3 4
+    cycle 1 :
+    2.00    2.00
+    3.00    5.00
+
+    ...
+
+    cycle 34 :
+    51.97   74.74
+    112.10  164.07
+
+    Result :
+    51.97   74.74
+    112.10  164.07
+.SH BUGS
+No known bugs.
+.SH AUTHOR
+Written by Viguier Benjamin (benjamin.viguier@epitech.eu)

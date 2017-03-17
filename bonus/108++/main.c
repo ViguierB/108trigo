@@ -23,6 +23,7 @@ t_fct	g_fct_tab[] =
     {"EXP", &my_exp},
     {"COS", &my_cos},
     {"SIN", &my_sin},
+    {"TAN", &my_tan},
     {"COSH", &my_cosh},
     {"SINH", &my_sinh},
     {"ACOS", &my_acos},

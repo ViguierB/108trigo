@@ -164,6 +164,48 @@ t_matrix	*my_sin(t_matrix *m, int ev)
   return (res);
 }
 
+t_matrix	*my_tan(t_matrix *m, int ev)
+{
+  t_matrix	*res;
+  t_matrix	x;
+  t_matrix	tmp;
+  t_matrix  last;
+  double	fac = 6;
+  int		i = 2;
+  int		j = 3;
+  clock_t toremove = 0;  
+  clock_t	start = clock();
+  clock_t	now = start;
+
+  res = malloc(sizeof(t_matrix));
+  cpy_matrix(&x, m);
+  cpy_matrix(res, m);
+  while (i < PRECI && (now - start - toremove) < TIMEOUT)
+    {
+      cpy_matrix(&last, res);      
+      print_cycle(res, ev, i - 1, &toremove);
+      mult_matrix(&x, m);
+      mult_matrix(&x, m);
+      cpy_matrix(&tmp, &x);
+      div_matrix(&tmp, fac);
+	    add_matrix(res, &tmp);
+      free(tmp.buf);
+      i++;
+      fac *= ++j;
+      fac *= ++j;
+      now = clock();
+      if (is_mequal(res, &last))
+        break;
+      if (is_mnan(res))
+      {
+        cpy_matrix(res, &last);
+        break;        
+      }
+    }
+  free(x.buf);
+  return (res);
+}
+
 t_matrix	*my_sinh(t_matrix *m, int ev)
 {
   t_matrix	*res;

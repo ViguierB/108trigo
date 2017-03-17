@@ -1,0 +1,9 @@
+#!/bin/bash
+
+mkdir -p /usr/share/man/man1/
+cp ./src/108trigo.manpage /usr/share/man/man1/108trigo.1
+gzip -f $_
+cd ../108++
+make re
+cd -
+cp ../108++/108trigo /usr/bin

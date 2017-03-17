@@ -32,11 +32,13 @@ extern int  g_isacos;
 t_matrix	*my_cos(t_matrix *m, int ev);
 t_matrix	*my_sin(t_matrix *m, int ev);
 t_matrix	*my_exp(t_matrix *m, int ev);
+t_matrix	*my_tan(t_matrix *m, int ev);
 t_matrix	*my_cosh(t_matrix *m, int ev);
 t_matrix	*my_sinh(t_matrix *m, int ev);
 t_matrix	*my_acos(t_matrix *m, int ev);
 t_matrix	*my_asin(t_matrix *m, int ev);
 t_matrix	*help(t_matrix *m, int ev);
+
 
 int	cpy_matrix(t_matrix *dest, t_matrix *from);
 int	mult_matrix(t_matrix *a, t_matrix *b);
