@@ -35,7 +35,7 @@ t_fct	g_fct_tab[] =
 
 int		fill_matrix(t_matrix *m, int ac, char **av)
 {
-  int		len;
+  int len;
   double	*ptr;
 
   m->s = sqrt(ac);
