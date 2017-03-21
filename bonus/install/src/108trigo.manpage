@@ -10,7 +10,7 @@ Apply a given function on a given matrix, and print the result
     fun			function to be applied, among at least "EXP", "COS", "SIN", "ASIN", "ACOS", "COSH" and "SINH"
     ai			coeficients of the matrix
 .SH OPTIONS
-    [-(a|e)]        a -> display more, e -> display etapes
+    [-(a|e)]        a -> display more, e -> display step by step
     -h, --help		display a help message and exit
 .SH Exit Status:
     84	If problem, (e.g., invalid argument(s))
@@ -29,7 +29,5 @@ Apply a given function on a given matrix, and print the result
     Result :
     51.97   74.74
     112.10  164.07
-.SH BUGS
-No known bugs.
 .SH AUTHOR
 Written by Viguier Benjamin (benjamin.viguier@epitech.eu)
